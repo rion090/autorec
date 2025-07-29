@@ -1,0 +1,5 @@
+{
+  "profile" : "CTF_PlAyer"
+  "tools" : ["nmap","amass","dirb","curl","subfinder","AssetFinder","crt.sh"]
+  "aggresive_mode" : true 
+}
