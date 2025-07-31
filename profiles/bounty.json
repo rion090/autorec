@@ -1,0 +1,5 @@
+{
+  "profile" : "Bounty_HuNter"
+  "tools" : ["arjun","amass","emailfinder","httpx","LinkFinder"]
+  "aggresive_mode" : false
+}
