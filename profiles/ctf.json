@@ -1,5 +1,70 @@
 {
-  "profile" : "CTF_PlAyer"
-  "tools" : ["nmap","amass","dirb","curl","subfinder","AssetFinder","crt.sh"]
-  "aggresive_mode" : true 
+  "profile": "ctf_player",
+  "description": "Minimal recon for CTF challenges. Probing phase requires manual approval as some CTFs restrict active scanning.",
+  "aggressive_mode": false,
+  "docker_support": false,
+  "phases": {
+    "default": {
+      "description": "Passive baseline recon. Safe for all CTFs.",
+      "requires_manual_approval": false,
+      "tools": [
+        {
+          "name": "amass",
+          "flags": "-passive",
+          "verify_cmd": "amass -version",
+          "install": {
+            "apt": "apt install amass",
+            "go": "go install github.com/owasp-amass/amass/v4/...@master"
+          }
+        },
+        {
+          "name": "curl",
+          "flags": "",
+          "verify_cmd": "curl --version",
+          "install": {
+            "apt": "apt install curl"
+          }
+        },
+        {
+          "name": "waybackurls",
+          "flags": "",
+          "verify_cmd": "waybackurls -h",
+          "install": {
+            "go": "go install github.com/tomnomnom/waybackurls@latest"
+          }
+        }
+      ]
+    },
+    "probing": {
+      "description": "Light active probing. Check CTF rules before running.",
+      "requires_manual_approval": true,
+      "aggressive_mode": false,
+      "tools": [
+        {
+          "name": "nmap",
+          "flags": "-T2",
+          "verify_cmd": "nmap --version",
+          "install": {
+            "apt": "apt install nmap"
+          }
+        },
+        {
+          "name": "dirb",
+          "flags": "",
+          "verify_cmd": "dirb --help",
+          "install": {
+            "apt": "apt install dirb"
+          }
+        },
+        {
+          "name": "httpx",
+          "flags": "",
+          "verify_cmd": "httpx -version",
+          "install": {
+            "go": "go install github.com/projectdiscovery/httpx/cmd/httpx@latest"
+          }
+        }
+      ]
+    }
+  }
 }
