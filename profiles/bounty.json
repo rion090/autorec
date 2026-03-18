@@ -1,5 +1,94 @@
 {
-  "profile" : "Bounty_HuNter"
-  "tools" : ["arjun","amass","emailfinder","httpx","LinkFinder"]
-  "aggresive_mode" : false
+  "profile": "bounty_hunter",
+  "description": "Passive-first recon for bug bounty programs. Extended phase requires manual approval based on program scope rules.",
+  "aggressive_mode": false,
+  "docker_support": false,
+  "phases": {
+    "default": {
+      "description": "Safe passive recon. Runs automatically, no direct target interaction.",
+      "requires_manual_approval": false,
+      "tools": [
+        {
+          "name": "amass",
+          "flags": "-passive",
+          "verify_cmd": "amass -version",
+          "install": {
+            "apt": "apt install amass",
+            "go": "go install github.com/owasp-amass/amass/v4/...@master"
+          }
+        },
+        {
+          "name": "gau",
+          "flags": "",
+          "verify_cmd": "gau --version",
+          "install": {
+            "go": "go install github.com/lc/gau/v2/cmd/gau@latest"
+          }
+        },
+        {
+          "name": "waybackurls",
+          "flags": "",
+          "verify_cmd": "waybackurls -h",
+          "install": {
+            "go": "go install github.com/tomnomnom/waybackurls@latest"
+          }
+        },
+        {
+          "name": "httpx",
+          "flags": "",
+          "verify_cmd": "httpx -version",
+          "install": {
+            "go": "go install github.com/projectdiscovery/httpx/cmd/httpx@latest"
+          }
+        },
+        {
+          "name": "arjun",
+          "flags": "",
+          "verify_cmd": "arjun --help",
+          "install": {
+            "apt": "pip install arjun"
+          }
+        },
+        {
+          "name": "LinkFinder",
+          "flags": "",
+          "verify_cmd": "python3 linkfinder.py --help",
+          "install": {
+            "apt": "git clone https://github.com/GerbenJavado/LinkFinder.git && cd LinkFinder && pip install -r requirements.txt"
+          }
+        }
+      ]
+    },
+    "extended": {
+      "description": "Light active recon. Only run after reading program scope rules carefully.",
+      "requires_manual_approval": true,
+      "aggressive_mode": false,
+      "tools": [
+        {
+          "name": "subfinder",
+          "flags": "",
+          "verify_cmd": "subfinder -version",
+          "install": {
+            "go": "go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest"
+          }
+        },
+        {
+          "name": "assetfinder",
+          "flags": "",
+          "verify_cmd": "assetfinder --help",
+          "install": {
+            "go": "go install github.com/tomnomnom/assetfinder@latest"
+          }
+        },
+        {
+          "name": "ffuf",
+          "flags": "",
+          "verify_cmd": "ffuf -V",
+          "install": {
+            "go": "go install github.com/ffuf/ffuf/v2@latest"
+          }
+        }
+      ]
+    }
+  }
 }
