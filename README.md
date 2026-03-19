@@ -22,3 +22,34 @@ MIT — open, modifiable, yours to build upon. See [LICENSE](LICENSE).
 This project prefers merge-based pull behavior, to avoid rebase-related confusion during pulls, consider configuring:
 ```bash
 git config --global pull.rebase false
+
+##Project Repo structure Planned:
+.
+├── docs/
+│   ├── prelaunch.md
+│   ├── contributing.md
+│   ├── schema.md              # Document the JSON profile schemas
+│   └── roadmap.md
+│
+├── profiles/
+│   ├── bounty.json
+│   ├── ctf.json
+│   └── schemas/
+│       ├── bounty.schema.json  # JSON Schema validation files
+│       └── ctf.schema.json
+│
+├── scripts/
+│   ├── validate.sh             # Validate profiles against schemas
+│   └── lint.sh
+│
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   └── profile_submission.md
+│   ├── PULL_REQUEST_TEMPLATE.md
+│   └── workflows/
+│       └── validate.yml        # CI to auto-validate profile JSON on PR
+│
+├── LICENSE
+├── README.md
+└── CONTRIBUTING.md
