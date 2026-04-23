@@ -99,7 +99,7 @@ def build_command(tool_name: str, flags: str, target: str) -> list[str]:
 
     commands = {
         # passive
-        "amass":       ["amass", "enum"] + flag_list + ["-d", target],
+        "amass":       ["amass", "enum"] + flag_list + ["-passive -d", target],
         "curl":        ["curl", "-sI"] + flag_list + [f"https://{target}"],
         "waybackurls": ["bash", "-c", f"echo {target} | waybackurls"],
         # probing
