@@ -6,10 +6,10 @@ Everything you need to do before running AutoRec for the first time.
 
 ## 1 — Clone the repo
 
-
+```bash
 git clone https://github.com/rion090/autorec.git
 cd autorec
-
+```
 
 ---
 
@@ -17,9 +17,9 @@ cd autorec
 
 AutoRec requires **Python 3.10 or later** (uses modern type hints).
 
-
+```bash
 python3 --version
-
+```
 
 If you're below 3.10, upgrade via your package manager or [python.org](https://python.org).
 
@@ -66,10 +66,10 @@ AutoRec will tell you which tools are missing when you run it, but installing ah
 
 Make sure the JSON profiles match the expected schema before running:
 
-
+```bash
 pip install jsonschema
 bash scripts/validate.sh
-
+```
 
 Both profiles should print `[✔] ... is valid`.
 
@@ -77,7 +77,7 @@ Both profiles should print `[✔] ... is valid`.
 
 ## 5 — Run AutoRec
 
-
+```bash
 # Interactive (recommended for first run)
 python3 src/autorec.py
 
@@ -89,7 +89,7 @@ python3 src/autorec.py -p bounty example.com --phase default
 
 # Direct — Bug Bounty, all phases (will prompt before active)
 python3 src/autorec.py -p bounty example.com --phase all
-
+```
 
 ---
 
@@ -113,6 +113,6 @@ Each file starts with a header showing exactly what command was run, making it e
 
 ## ⚠ Ethical reminder
 
-- CTF: Check the competition rules before running any active scan. Some CTFs ban nmap/dirb entirely.
-- Bug Bounty: Only scan domains explicitly listed in the programme scope. Stay in bounds.
-- Always: Never scan targets you don't own or have written permission to test.
+- **CTF:** Check the competition rules before running any active scan. Some CTFs ban nmap/dirb entirely.
+- **Bug Bounty:** Only scan domains explicitly listed in the programme scope. Stay in bounds.
+- **Always:** Never scan targets you don't own or have written permission to test.
