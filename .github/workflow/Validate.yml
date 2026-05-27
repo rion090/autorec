@@ -1,0 +1,59 @@
+name: Validate Profiles & Lint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "profiles/**.json"
+      - "src/**.py"
+      - "scripts/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "profiles/**.json"
+      - "src/**.py"
+      - "scripts/**"
+
+jobs:
+  # ── Job 1: Validate JSON profiles against schemas ──────────────────────────
+  validate-profiles:
+    name: Validate JSON Profiles
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install jsonschema
+        run: pip install jsonschema
+
+      - name: Make validate script executable
+        run: chmod +x scripts/validate.sh
+
+      - name: Validate all profiles
+        run: bash scripts/validate.sh
+
+  # ── Job 2: Lint Python source files ────────────────────────────────────────
+  lint-python:
+    name: Lint Python Source
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Make lint script executable
+        run: chmod +x scripts/lint.sh
+
+      - name: Syntax check (all .py files)
+        run: bash scripts/lint.sh
